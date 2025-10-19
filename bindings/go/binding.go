@@ -1,15 +1,18 @@
 package tree_sitter_ic10
 
-// #cgo CFLAGS: -std=c11 -fPIC
-// #include "../../src/parser.c"
-// #if __has_include("../../src/scanner.c")
-// #include "../../src/scanner.c"
-// #endif
+// #cgo CFLAGS: -std=c11 -fPIC -I../../src
+// #include "tree_sitter/parser.h"
+// TSLanguage *tree_sitter_ic10(void);
 import "C"
 
-import "unsafe"
+import (
+	"unsafe"
 
-// Get the tree-sitter Language for this grammar.
-func Language() unsafe.Pointer {
-	return unsafe.Pointer(C.tree_sitter_ic10())
+	_ "github.com/skhome/tree-sitter-ic10/src"
+	sitter "github.com/smacker/go-tree-sitter"
+)
+
+func GetLanguage() *sitter.Language {
+	ptr := unsafe.Pointer(C.tree_sitter_ic10())
+	return sitter.NewLanguage(ptr)
 }

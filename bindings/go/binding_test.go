@@ -1,15 +1,16 @@
 package tree_sitter_ic10_test
 
 import (
+	"context"
 	"testing"
 
-	tree_sitter "github.com/tree-sitter/go-tree-sitter"
-	tree_sitter_ic10 "github.com/tree-sitter/tree-sitter-ic10/bindings/go"
+	ic10 "github.com/skhome/tree-sitter-ic10/bindings/go"
+	sitter "github.com/smacker/go-tree-sitter"
 )
 
 func TestCanLoadGrammar(t *testing.T) {
-	language := tree_sitter.NewLanguage(tree_sitter_ic10.Language())
-	if language == nil {
-		t.Errorf("Error loading Stationeers MIPS grammar")
+	n, _ := sitter.ParseCtx(context.Background(), []byte("move r0 42"), ic10.GetLanguage())
+	if n.String() != "(program (instruction))" {
+		t.Errorf("Could not parse: %s", n.String())
 	}
 }
