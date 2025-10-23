@@ -1,4 +1,4 @@
-package tree_sitter_ic10
+package ic10
 
 // #cgo CFLAGS: -std=c11 -fPIC -I../../src
 // #include "tree_sitter/parser.h"

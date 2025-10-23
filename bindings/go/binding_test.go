@@ -1,4 +1,4 @@
-package tree_sitter_ic10_test
+package ic10_test
 
 import (
 	"context"
